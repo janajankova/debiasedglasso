@@ -3,7 +3,13 @@
 ## This function allows you to calculate:
 ## (i) confidence intervals for individual entries Theta[i,j] of a precision matrix Theta
 ## (ii) p-values (adjusted for multiple testing) for testing a hypothesis of type H_{i,j}: Theta[i,j] = a[i,j]
-## @param X: 
+## @param X         design matrix of size n x p
+##        pval      If FALSE (Default value), calculate confidence intervals for individual entries of the precision matrix.
+##                  If TRUE, calculate adjusted p-values for testing: H0: Theta[i,j] = theta.H0[i,j] for all i,j. Default=FALSE.
+##        theta.H0  null hypothesis, pxp matrix
+##        scale.X   scale design matrix X? Default TRUE.
+##        alpha     significance level for testing and confidence intervals
+##
 
 debiased.glasso <- function(X, pval = FALSE, scale.X = TRUE, p = ncol(X), n = nrow(X), lambda = sqrt(log(p)/n), 
                             theta.H0 = matrix(0,ncol(X), ncol(X)), alpha = 0.05){
